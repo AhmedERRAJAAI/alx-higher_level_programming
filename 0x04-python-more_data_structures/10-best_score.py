@@ -5,3 +5,4 @@ def best_score(a_dictionary):
     for key in a_dictionary:
         if a_dictionary[key] > ref:
             greatest_key = key
+    return greatest_key
