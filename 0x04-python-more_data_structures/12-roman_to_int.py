@@ -1,19 +1,36 @@
 #!/usr/bin/python3
-def roman_to_int(roman_string):
-    if type(romain_string) != str or not romain_string:
+
+def calculate_difference(values):
+    total = sum(values)
+    maximum = max(values)
+    return maximum - (total - maximum)
+
+def roman_to_integer(roman_numeral):
+    if not isinstance(roman_numeral, str) or not roman_numeral:
         return 0
 
-    roman_digit_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-    integer_value = 0
-    last_digit_value = 0
+    roman_values = {
+        'I': 1, 'V': 5, 'X': 10, 'L': 50,
+        'C': 100, 'D': 500, 'M': 1000
+    }
+    
+    result = 0
+    current_group = []
+    previous_value = 0
 
-    if isinstance(roman_numeral, str) and roman_numeral:
-        for symbol in reversed(roman_numeral):
-            current_digit_value = roman_digit_map[symbol]
-            if current_digit_value >= last_digit_value:
-                integer_value += current_digit_value
-            else:
-                integer_value -= current_digit_value
-            last_digit_value = current_digit_value
-    return integer_value
+    for char in roman_numeral:
+        if char not in roman_values:
+            return 0  # Invalid Roman numeral character
+        
+        current_value = roman_values[char]
+        
+        if current_value <= previous_value:
+            result += calculate_difference(current_group)
+            current_group = [current_value]
+        else:
+            current_group.append(current_value)
+        
+        previous_value = current_value
 
+    result += calculate_difference(current_group)
+    return result
