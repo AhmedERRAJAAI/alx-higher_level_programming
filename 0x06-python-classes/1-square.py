@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-"""Square module"""
+"""class Square"""
 
 
 class Square:
-    """class body"""
+    """
+       Attributes:
+        size: size of a square (1 side).
+    """
     def __init__(self, size):
-        """init"""
-        self.__size = size
-
+        """Creates new instances"""
+        self.__size = size 
